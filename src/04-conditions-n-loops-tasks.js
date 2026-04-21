@@ -26,8 +26,17 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  if (num % 3 === 0 && num % 5 === 0) {
+    return 'FizzBuzz';
+  }
+  if (num % 3 === 0) {
+    return 'Fizz';
+  }
+  if (num % 5 === 0) {
+    return 'Buzz';
+  }
+  return num;
 }
 
 /**
@@ -41,8 +50,13 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  if (n === 0 || n === 1) return n;
+  let factorial = 1;
+  for (let i = 2; i <= n; i += 1) {
+    factorial *= i;
+  }
+  return factorial;
 }
 
 /**
@@ -57,8 +71,16 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  const numbers = [n1, n2];
+  const sortedNumbers = numbers.sort((a, b) => a - b);
+  const smallNumber = sortedNumbers[0];
+  const largeNumber = sortedNumbers[1];
+  let totalSum = 0;
+  for (let i = smallNumber; i <= largeNumber; i += 1) {
+    totalSum += i;
+  }
+  return totalSum;
 }
 
 /**
@@ -199,8 +221,8 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 /**
@@ -215,8 +237,8 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return num.toString().split('').reverse().join('');
 }
 
 /**
@@ -239,8 +261,21 @@ function reverseInteger(/* num */) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const cnnStr = ccn.toString();
+  let sum = 0;
+  const parity = cnnStr.length % 2;
+  for (let i = 0; i < cnnStr.length; i += 1) {
+    let digit = Number(cnnStr[i]);
+    if (i % 2 === parity) {
+      digit *= 2;
+      if (digit > 9) {
+        digit -= 9;
+      }
+    }
+    sum += digit;
+  }
+  return Number(sum % 10) === 0;
 }
 
 /**
@@ -257,8 +292,21 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const digits = Array.from(String(num), Number);
+  const sum = digits.reduce(
+    (accumulator, currentValue) => accumulator + currentValue,
+    0
+  );
+  if (sum > 9) {
+    const digit = Array.from(String(sum), Number);
+    const sums = digit.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    return sums;
+  }
+  return sum;
 }
 
 /**
